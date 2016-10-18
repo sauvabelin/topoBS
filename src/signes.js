@@ -2,19 +2,6 @@ export default {
 
 	descs: [],
 
-	shuffle(swag) {
-
-		var j, x, i;
-    for (i = swag.length; i; i--) {
-        j = Math.floor(Math.random() * i);
-        x = swag[i - 1];
-        swag[i - 1] = swag[j];
-        swag[j] = x;
-    }
-
-		return swag;
-	},
-
 	descriptions() {
 
 		if(this.descs.length > 0)
@@ -27,7 +14,7 @@ export default {
 	},
 
 	all() {
-		return this.shuffle(this.signes);
+		return this.signes;
 	},
 
 	signes: [

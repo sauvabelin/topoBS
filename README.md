@@ -1,25 +1,21 @@
-# Quasar App
+#TopoBS
 
-> A Quasar project
+TopoBS est une petite application web sans prétention permettant de réviser ses signes
+topos facilement.
 
-## Build Setup
+## Statut actuel
+L'application ne sauve pas les scores et ne tient aucun compte des résultats, aucun
+backend n'est pour l'instant envisagé.
 
-``` bash
-# install dependencies
-npm install
+## Fonctionnement
+L'application est codée sous **Vue.js** avec le framework **Quasar** pour l'interface.
+Les images utilisées sont les symboles officiels de topographie suisse, carte 1:25000.
 
-# serve with hot reload at localhost:8080
-quasar dev
-
-# build for production with minification
-quasar build
-
-# run unit tests
-quasar test --unit
-
-# run e2e tests
-quasar test --e2e
-
-# run all tests
-quasar test
-```
+## Comment l'utiliser ?
+L'application sera bientôt mise en ligne avec cache agressif afin de sauver l'integralité
+de l'application côté client et éviter de la recharger à chaque fois. Si vous souhaitez
+l'installer en DEV :
+- Clonez ce repo
+- `cd topoBS`
+- `npm install`
+- `quasar dev` et c'est parti sur localhost:8080 !

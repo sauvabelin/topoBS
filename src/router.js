@@ -18,23 +18,26 @@ function load (name) {
 }
 
 let routes = {
-  // Not found
-  '*': {
-    component: load('error404')
-  },
+    '*': {
+        component: load('error404')
+    },
 
-  // Default
-  '/': {
-    component: load('index')
-    /*
-    subRoutes: {
+    '/': {
+        component: load('index')
+    },
+
+    '/facile': {
+        component: load('facile')
+    },
+
+    'moyen': {
+        component: load('moyen')
+    },
+    
+    'difficile': {
+        component: load('difficile')
     }
-    */
-  },
 
-  '/facile': {
-    component: load('facile')
-  }
 }
 
 let Router = new VueRouter()

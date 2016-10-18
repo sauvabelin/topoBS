@@ -57,3 +57,24 @@ export default {
   }
 }
 </script>
+
+<style>
+
+    .image {
+
+        width:100%;
+        height:100px;
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        border-bottom:1px solid #eee;
+        background:rgb(250,250,250);
+    }
+
+    .image img {
+
+        display: block;
+        margin: auto;
+    }
+
+</style>
