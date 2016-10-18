@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueTouch from 'vue-touch'
-// import VueResource from 'vue-resource'
 import Quasar from 'quasar'
 import Router from './router'
 

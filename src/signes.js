@@ -14,7 +14,11 @@ export default {
 	},
 
 	all() {
-		return this.signes;
+
+        var s = [];
+        for(var i = 0; i < this.signes.length; i++)
+            s.push(this.signes[i]);
+		return s;
 	},
 
 	signes: [
@@ -466,5 +470,6 @@ export default {
 			id: 128,
 			dn: "Route 6ème classe, sentier"
 		}
+        //*/
 	]
 };

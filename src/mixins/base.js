@@ -1,11 +1,13 @@
 
 import Signes from './../signes'
+import {Toast} from 'quasar'
 
 export default {
 
     data() {
         return {
-            history: -1,
+            descs: [],
+            history:0,
             score: 0,
             signes: []
         }
@@ -18,11 +20,22 @@ export default {
     },
 
     ready () {
-        this.signes = Signes.all().shuffle();
+
+        this.$set('descs', Signes.descriptions().shuffle());
+        this.$set('signes', Signes.all().shuffle());
         this.next();
     },
 
     methods: {
+
+        init() {
+
+            var s = Signes.all().shuffle();
+
+            this.history    = 0;
+            this.score      = 0;
+            this.$set('signes', s);
+        },
 
         leave() {
 
@@ -32,7 +45,11 @@ export default {
         },
 
         end() {
-            alert("Fin, score final : " + this.score + "/" + this.history);
+            Toast.create.positive({
+                html: "Score final : " + this.score + " sur " + this.history,
+                timeout: 5000
+            });
+            this.init();
             this.$router.go('/');
         }
     }

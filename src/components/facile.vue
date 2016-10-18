@@ -6,7 +6,7 @@
                 <button @click="leave">
                     <i>keyboard_arrow_left</i>
                 </button>
-                facile - {{ signes.length }} restants
+                facile - {{ signes.length + 1 }} restants
             </quasar-toolbar-title>
         </div>
 
@@ -33,8 +33,9 @@
 
 <script>
 
-    import Signes from './../signes'
-    import Base   from './../mixins/base'
+    import Signes       from './../signes'
+    import { Toast }    from 'quasar'
+    import Base         from './../mixins/base'
 
     export default {
 
@@ -58,7 +59,7 @@
             next() {
 
                 if(this.signes.length == 0)
-                    this.end();
+                    return this.end();
 
                 this.history++;
 
@@ -66,14 +67,17 @@
                 if(Math.random() > 0.5)
                     this.current.potential = this.current.obj.dn;
                 else {
-                    var descs   = Signes.descriptions(),
-                        id      = 0;
+                    var id = 0;
 
                     while(this.ids.contains(id))
-                        id = Math.floor(Math.random()*Signes.signes.length) + 1;
+                        id = Math.floor(Math.random()*this.descs.length) + 1;
 
-                    this.ids.push(id);
-                    this.current.potential = descs[id];
+                    if(this.descs[id] === undefined)
+                        this.current.potential = this.current.obj.dn; //TODO : debug this shit
+                    else {
+                        this.ids.push(id);
+                        this.current.potential = this.descs[id];
+                    }
                 }
             },
 
@@ -81,8 +85,7 @@
                 if(this.current.obj.dn != this.current.potential)
                     this.score++;
                 else
-                    alert("C'était vrai, il s'agissait de : " + this.current.obj.dn);
-
+                    Toast.create.negative("C'était juste : " + this.current.obj.dn);
                 this.next();
             },
 
@@ -91,7 +94,7 @@
                 if(this.current.obj.dn === this.current.potential)
                     this.score++;
                 else
-                    alert("Faux, il s'agissait de : " + this.current.obj.dn);
+                    Toast.create.negative("Faux, c'était : " + this.current.obj.dn);
 
                 this.next();
             }
@@ -101,6 +104,23 @@
 </script>
 
 <style scoped>
+
+.image {
+
+    width:100%;
+    height:100px;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    border-bottom:1px solid #eee;
+    background:rgb(250,250,250);
+}
+
+.image img {
+
+    display: block;
+    margin: auto;
+}
 
     .buttons-m8 {
 

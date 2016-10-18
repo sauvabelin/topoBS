@@ -6,7 +6,7 @@
                 <button @click="leave">
                     <i>keyboard_arrow_left</i>
                 </button>
-                Moyen - {{ signes.length }} restants
+                Moyen - {{ signes.length + 1}} restants
             </quasar-toolbar-title>
         </div>
 
@@ -31,8 +31,9 @@
 
 <script>
 
-    import Signes from './../signes'
-    import Base   from './../mixins/base'
+    import Signes       from './../signes'
+    import {Toast}      from 'quasar'
+    import Base         from './../mixins/base'
 
     export default {
 
@@ -55,7 +56,7 @@
                 if(option == this.current.obj.dn)
                     this.score++;
                 else
-                    alert("Eh non, il s'agissait de : " + this.current.obj.dn);
+                    Toast.create.negative("Eh non, il s'agissait de : " + this.current.obj.dn);
 
                 this.next();
             },
@@ -63,22 +64,21 @@
             next() {
 
                 if(this.signes.length == 0)
-                    this.end();
+                    return this.end();
 
                 this.history++;
                 this.current.obj = this.signes.shift();
 
                 var options = [],
-                    descs   = Signes.descriptions(),
                     dummy   = '';
 
                 options.push(this.current.obj.dn);
 
                 while(options.length < 4) {
 
-                    dummy = descs[Math.floor(Math.random()*Signes.signes.length) +1];
+                    dummy = this.descs[Math.floor(Math.random()*this.descs.length) +1];
 
-                    if(!options.includes(dummy))
+                    if(!options.includes(dummy) && dummy !== undefined)
                         options.push(dummy);
                 }
 
@@ -88,3 +88,22 @@
     }
 
 </script>
+
+<style>
+.image {
+
+    width:100%;
+    height:100px;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    border-bottom:1px solid #eee;
+    background:rgb(250,250,250);
+}
+
+.image img {
+
+    display: block;
+    margin: auto;
+}
+</style>
